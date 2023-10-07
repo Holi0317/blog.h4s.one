@@ -8,13 +8,20 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "fmt": "prettier --write . --plugin=prettier-plugin-astro"
+    "fmt": "prettier --cache --write . --plugin=prettier-plugin-astro",
+    "prepare": "husky install"
   },
   "dependencies": {
     "astro": "^3.2.3"
   },
   "devDependencies": {
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
     "prettier-plugin-astro": "^0.12.0"
+  },
+  "lint-staged": {
+    "*.{js,ts,jsx,tsx,astro,vue}": "eslint --fix",
+    "*": "prettier --cache --ignore-unknown --write --plugin=prettier-plugin-astro"
   }
 }

@@ -1,0 +1,12 @@
+/pnpm-lock.yaml
+
+
+# build output
+dist/
+# generated types
+.astro/
+
+.idea/
+
+.DS_Store
+*.log
