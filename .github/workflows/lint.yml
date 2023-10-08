@@ -29,6 +29,12 @@ jobs:
       - name: "Install node dependencies"
         run: "pnpm install --frozen-lockfile"
 
+      - name: "Cache eslint"
+        uses: "actions/cache@v3"
+        with:
+          path: ".eslintcache"
+          key: "${{ runner.os }}-eslint"
+
       - name: "Run lint"
         run: "pnpm run lint"
 
