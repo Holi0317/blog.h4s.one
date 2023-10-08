@@ -41,6 +41,5 @@ jobs:
       - name: "Run fmt check"
         run: "pnpm run fmt --check"
 
-      # TODO: Add typecheck script and remove --if-present flag
       - name: "Run typecheck"
-        run: "pnpm run --if-present typecheck"
+        run: "pnpm run typecheck"
