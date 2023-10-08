@@ -8,6 +8,18 @@ dependencies:
   '@astrojs/mdx':
     specifier: ^1.1.1
     version: 1.1.1(astro@3.2.3)
+  '@iconify-json/fa6-brands':
+    specifier: ^1.1.13
+    version: 1.1.13
+  '@iconify-json/fa6-regular':
+    specifier: ^1.1.13
+    version: 1.1.13
+  '@iconify-json/fa6-solid':
+    specifier: ^1.1.15
+    version: 1.1.15
+  '@unocss/preset-icons':
+    specifier: ^0.56.5
+    version: 0.56.5
   '@unocss/preset-wind':
     specifier: ^0.56.5
     version: 0.56.5
@@ -843,6 +855,24 @@ packages:
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@iconify-json/fa6-brands@1.1.13:
+    resolution: {integrity: sha512-7toccM334NO1jIsfnqTK9Bo12CIuE4ClnfW9SyRFKFax7b/oKOsgnvokgCAtQgomiQ6ODjC1zWCpzSDidtBUXw==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/fa6-regular@1.1.13:
+    resolution: {integrity: sha512-wY5nEeWwg+fdDzfPdzOHcbgiN7Qk2bTyO0BreJUQJb8NKPcXivyHAlkWPc+wA0kQwfqrmekVCwWnrLoD7B9T0g==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
+
+  /@iconify-json/fa6-solid@1.1.15:
+    resolution: {integrity: sha512-RMiUSSdnxD4BLDW2QBskqr/+i1/6xhZK+E3sq24URnB3fSQUCWvyhNN3ZnU3RMjWaMVNxPy9pEXr1i/8s63GRQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
