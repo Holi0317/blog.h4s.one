@@ -8,6 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
+    "lint": "eslint --cache --ext .js,.ts,.jsx,.tsx,.astro,.vue .",
     "fmt": "prettier --cache --write . --plugin=prettier-plugin-astro",
     "prepare": "husky install"
   },
@@ -15,10 +16,16 @@
     "astro": "^3.2.3"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.7.4",
+    "@typescript-eslint/parser": "^6.7.4",
+    "eslint": "^8.51.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-astro": "^0.29.1",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3",
-    "prettier-plugin-astro": "^0.12.0"
+    "prettier-plugin-astro": "^0.12.0",
+    "typescript": "^5.2.2"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx,astro,vue}": "eslint --fix",

@@ -1,6 +1,5 @@
 /pnpm-lock.yaml
 
-
 # build output
 dist/
 # generated types
