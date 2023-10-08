@@ -4,6 +4,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "files.associations": {
+    "*.mdx": "markdown"
+  },
 
   // ==== Formatting ====
   "editor.defaultFormatter": "esbenp.prettier-vscode",
