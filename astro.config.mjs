@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
+import UnoCSS from "unocss/astro";
 
 const DEV_PORT = 4321;
 
@@ -22,5 +23,10 @@ export default defineConfig({
     port: DEV_PORT,
   },
 
-  integrations: [mdx()],
+  integrations: [
+    mdx(),
+    UnoCSS({
+      injectReset: true,
+    }),
+  ],
 });

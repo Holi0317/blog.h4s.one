@@ -12,6 +12,7 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
+    "@unocss",
     "plugin:astro/recommended",
 
     "prettier",
