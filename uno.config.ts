@@ -8,7 +8,12 @@ export default defineConfig({
     presetWind({
       dark: "media",
     }),
-    presetIcons(),
+    presetIcons({
+      extraProperties: {
+        display: "inline-block",
+        "vertical-align": "middle",
+      },
+    }),
   ],
   transformers: [transformerDirectives()],
 
