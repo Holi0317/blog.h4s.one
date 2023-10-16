@@ -1,0 +1,29 @@
+---
+import Rainbow from "./Rainbow.astro";
+import { AppConfig } from "../AppConfig";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<header class:list={["flex flex-row items-center justify-center", className]}>
+  <h1 class="font-size-8 fw-500">
+    <a href="/" class="flex">
+      <Rainbow class="mr-1" />
+      {AppConfig.name}
+    </a>
+  </h1>
+  <nav class="flex grow items-center justify-end gap-5 text-3xl">
+    <a href={AppConfig.links.github} target="_blank" title="My Github profile">
+      <div class="i-fa6-brands:github"></div>
+    </a>
+
+    <a href="rss" target="_blank" title="Subscribe with RSS">
+      <!-- TODO: Add proper rss link -->
+      <div class="i-fa6-solid:rss"></div>
+    </a>
+  </nav>
+</header>

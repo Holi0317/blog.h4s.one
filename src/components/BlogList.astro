@@ -1,0 +1,29 @@
+---
+import BlogSnippet from "./BlogSnippet.astro";
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  blogs: Array<CollectionEntry<"blog">>;
+}
+
+const blogs = Astro.props.blogs
+  .filter((blogs) => {
+    if (import.meta.env.CF_PAGES_BRANCH !== "main") {
+      return true;
+    }
+
+    return !blogs.data.draft;
+  })
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+---
+
+<div class="flex flex-col gap-3">
+  {
+    blogs.map((entry) => (
+      <BlogSnippet
+        class="border-0 border-b-1 border-primary-200 border-dotted py-3"
+        blog={entry}
+      />
+    ))
+  }
+</div>

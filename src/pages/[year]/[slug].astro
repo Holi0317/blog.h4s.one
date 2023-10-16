@@ -1,0 +1,65 @@
+---
+import { getCollection, type CollectionEntry } from "astro:content";
+import Main from "../../layouts/Main.astro";
+import BlogTitle from "../../components/BlogTitle.astro";
+import { AppConfig } from "../../AppConfig";
+
+export async function getStaticPaths() {
+  const blogs = await getCollection("blog");
+
+  return blogs.map((entry) => ({
+    params: {
+      slug: entry.slug,
+      year: entry.data.pubDate.toISOString().slice(0, 4),
+    },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<"blog">;
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const branch = import.meta.env.CF_PAGES_BRANCH ?? "main";
+const githubUrl = new URL(
+  `blob/${branch}/src/content/blog/${entry.id}`,
+  AppConfig.links.repo,
+);
+---
+
+<Main>
+  <main class="pb-8">
+    <BlogTitle blog={entry} />
+
+    <article class="blog">
+      <Content />
+    </article>
+
+    <p class="my-6">
+      <a href={githubUrl.toString()} target="_blank" rel="noreferrer noopener">
+        View this page on GitHub
+      </a>
+    </p>
+  </main>
+</Main>
+
+<style is:global>
+  article.blog :is(h1, h2, h3, h4, h5, h6) {
+    @apply mt-10 mb-6;
+  }
+
+  article.blog :is(p, pre) {
+    @apply my-3;
+  }
+
+  article.blog hr {
+    @apply my-6;
+  }
+
+  article.blog pre {
+    @apply p-3;
+  }
+</style>

@@ -1,0 +1,32 @@
+---
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/comfortaa";
+import "../styles.css";
+
+import Nav from "../components/Nav.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+
+  <body class="min-h-screen font-b dark:bg-slate-700 dark:color-white">
+    <div class="grid-container grid grid-cols-2 mx-auto container">
+      <Nav class="col-span-2 px-5 py-6" />
+
+      <div class="col-span-2 mb-5 mt-2 border-b border-primary-300"></div>
+
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style>
+  .grid-container {
+    grid-template-columns: 2fr 1fr;
+  }
+</style>
