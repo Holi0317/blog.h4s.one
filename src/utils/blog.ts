@@ -1,6 +1,12 @@
+import { DateTime } from "luxon";
 import type { CollectionEntry } from "astro:content";
 
+export function blogPubDate(blog: CollectionEntry<"blog">) {
+  return DateTime.fromJSDate(blog.data.pubDate, { zone: "UTC" }).setLocale(
+    "en-US",
+  );
+}
+
 export function urlForBlog(blog: CollectionEntry<"blog">) {
-  const year = blog.data.pubDate.toISOString().slice(0, 4);
-  return `/blog/${year}/${blog.slug}`;
+  return `/blog/${blogPubDate(blog).year}/${blog.slug}`;
 }

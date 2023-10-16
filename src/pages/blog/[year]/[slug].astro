@@ -3,6 +3,7 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import MainLayout from "../../../layouts/MainLayout.astro";
 import BlogTitle from "../../../components/BlogTitle.astro";
 import { AppConfig } from "../../../AppConfig";
+import { blogPubDate } from "../../../utils/blog";
 
 export async function getStaticPaths() {
   const blogs = await getCollection("blog");
@@ -10,7 +11,7 @@ export async function getStaticPaths() {
   return blogs.map((entry) => ({
     params: {
       slug: entry.slug,
-      year: entry.data.pubDate.toISOString().slice(0, 4),
+      year: blogPubDate(entry).year,
     },
     props: { entry },
   }));
