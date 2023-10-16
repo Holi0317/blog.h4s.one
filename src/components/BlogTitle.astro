@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { urlForBlog } from "../utils/blog";
+import { DateTime } from "luxon";
+import { blogPubDate, urlForBlog } from "../utils/blog";
 
 interface Props {
   blog: CollectionEntry<"blog">;
@@ -10,10 +11,8 @@ interface Props {
 const { blog } = Astro.props;
 const link = Astro.props.link ?? false;
 
-const { title, pubDate, draft } = blog.data;
-
-const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
-const dateDisplay = formatter.format(pubDate);
+const { title, draft } = blog.data;
+const pubDate = blogPubDate(blog);
 
 const url = urlForBlog(blog);
 
@@ -30,7 +29,7 @@ const Wrapper = link ? "a" : Fragment;
     }
   </Wrapper>
 </h1>
-<time datetime={pubDate.toISOString()} class="text-sm">
+<time datetime={pubDate.toISODate()} class="text-sm">
   <div class="i-fa6-regular:calendar mr-2"></div>
-   Posted on {dateDisplay}
+   Posted on {pubDate.toLocaleString(DateTime.DATE_FULL)}
 </time>
