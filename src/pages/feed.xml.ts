@@ -24,11 +24,13 @@ export async function GET(context: APIContext) {
     <lastBuildDate>${DateTime.utc().toHTTP()}</lastBuildDate>
     `,
 
-    items: blog.map((blog) => ({
-      title: blog.data.title,
-      pubDate: blog.data.pubDate,
-      description: blog.data.snippet,
-      link: urlForBlog(blog),
-    })),
+    items: blog
+      .filter((blog) => !blog.data.draft)
+      .map((blog) => ({
+        title: blog.data.title,
+        pubDate: blog.data.pubDate,
+        description: blog.data.snippet,
+        link: urlForBlog(blog),
+      })),
   });
 }
