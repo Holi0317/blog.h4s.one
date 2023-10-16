@@ -30,7 +30,7 @@ const githubUrl = new URL(
 );
 ---
 
-<MainLayout>
+<MainLayout title={`${entry.data.title} - ${AppConfig.name}`}>
   <BlogTitle blog={entry} />
 
   <article class="blog">
