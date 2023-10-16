@@ -1,5 +1,16 @@
 ---
+import { AppConfig } from "../AppConfig";
 import Main from "../layouts/Main.astro";
+
+// @unocss-include
+const links = [
+  { name: "GitHub", icon: "i-fa6-brands:github", href: AppConfig.links.github },
+  {
+    name: "Email",
+    icon: "i-fa6-solid:envelope",
+    href: `mailto:${AppConfig.email}`,
+  },
+];
 ---
 
 <Main>
@@ -8,4 +19,17 @@ import Main from "../layouts/Main.astro";
   <p>I'm Hollis, a Software Engineer and DevOps Engineer.</p>
 
   <p>Here is my <a href="/blog">blog</a> for storing my random thoughts.</p>
+
+  <p>Find me on</p>
+
+  <p class="flex gap-2">
+    {
+      links.map((link) => (
+        <a href={link.href} target="_blank" rel="noreferrer noopener">
+          <span class:list={["inline-block mr-1", link.icon]} />
+          {link.name}
+        </a>
+      ))
+    }
+  </p>
 </Main>
