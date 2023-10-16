@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import Main from "../../layouts/Main.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 import BlogList from "../../components/BlogList.astro";
 
 // Get all entries from a collection.
@@ -9,6 +9,6 @@ import BlogList from "../../components/BlogList.astro";
 const blogs = await getCollection("blog");
 ---
 
-<Main>
+<MainLayout>
   <BlogList blogs={blogs} />
-</Main>
+</MainLayout>

@@ -1,6 +1,6 @@
 ---
 import { AppConfig } from "../AppConfig";
-import Main from "../layouts/Main.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 
 // @unocss-include
 const links = [
@@ -13,7 +13,7 @@ const links = [
 ];
 ---
 
-<Main>
+<MainLayout>
   <p>Hello 👋</p>
 
   <p>I'm Hollis, a Software Engineer and DevOps Engineer.</p>
@@ -32,4 +32,4 @@ const links = [
       ))
     }
   </p>
-</Main>
+</MainLayout>

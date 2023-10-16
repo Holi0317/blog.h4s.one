@@ -1,6 +1,6 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Main from "../../../layouts/Main.astro";
+import MainLayout from "../../../layouts/MainLayout.astro";
 import BlogTitle from "../../../components/BlogTitle.astro";
 import { AppConfig } from "../../../AppConfig";
 
@@ -30,7 +30,7 @@ const githubUrl = new URL(
 );
 ---
 
-<Main>
+<MainLayout>
   <BlogTitle blog={entry} />
 
   <article class="blog">
@@ -42,7 +42,7 @@ const githubUrl = new URL(
       View this page on GitHub
     </a>
   </p>
-</Main>
+</MainLayout>
 
 <style is:global>
   article.blog :is(h1, h2, h3, h4, h5, h6) {
