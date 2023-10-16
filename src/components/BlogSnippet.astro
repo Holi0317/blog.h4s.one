@@ -1,0 +1,25 @@
+---
+import { urlForBlog } from "../utils/blog";
+import type { CollectionEntry } from "astro:content";
+import BlogTitle from "./BlogTitle.astro";
+
+interface Props {
+  blog: CollectionEntry<"blog">;
+  class?: string;
+}
+
+const { blog, class: className } = Astro.props;
+const { snippet } = blog.data;
+
+const url = urlForBlog(blog);
+---
+
+<div class:list={className}>
+  <BlogTitle blog={blog} link={true} />
+
+  <p class="py-2">
+    {snippet}
+  </p>
+
+  <a class="text-primary-300" href={url}>Continue reading</a>
+</div>

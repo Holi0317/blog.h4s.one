@@ -1,0 +1,27 @@
+---
+const colors = [
+  "#e50000",
+  "#ff8d00",
+  "#ffee00",
+  "#028121",
+  "#004cff",
+  "#770088",
+];
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div class:list={["h-auto w-[10px] flex flex-col", className]}>
+  {
+    colors.map((color) => (
+      <div class="h-auto flex-grow" style={`background: ${color}`}>
+        {" "}
+      </div>
+    ))
+  }
+  <div></div>
+</div>

@@ -1,0 +1,36 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { urlForBlog } from "../utils/blog";
+
+interface Props {
+  blog: CollectionEntry<"blog">;
+  link?: boolean;
+}
+
+const { blog } = Astro.props;
+const link = Astro.props.link ?? false;
+
+const { title, pubDate, draft } = blog.data;
+
+const formatter = new Intl.DateTimeFormat("en", { dateStyle: "medium" });
+const dateDisplay = formatter.format(pubDate);
+
+const url = urlForBlog(blog);
+
+const Wrapper = link ? "a" : Fragment;
+---
+
+<h1 class="my-2 text-3xl font-black">
+  <Wrapper href={url}>
+    {title}
+    {
+      draft ? (
+        <span class="ml-2 rounded bg-amber p-1 text-black">Draft</span>
+      ) : null
+    }
+  </Wrapper>
+</h1>
+<time datetime={pubDate.toISOString()} class="flex items-center text-sm">
+  <div class="i-fa6-regular:calendar mr-2"></div>
+   Posted on {dateDisplay}
+</time>

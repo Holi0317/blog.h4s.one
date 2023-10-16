@@ -1,16 +1,20 @@
 ---
+import { getCollection } from "astro:content";
+import Main from "../layouts/Main.astro";
+import BlogList from "../components/BlogList.astro";
 
+// Get all entries from a collection.
+// Requires the name of the collection as an argument.
+// Example: retrieve `src/content/blog/**`
+const blogs = await getCollection("blog");
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
-  </head>
-  <body>
-    <h1>Astro</h1>
-  </body>
-</html>
+<Main>
+  <main>
+    <BlogList blogs={blogs} />
+  </main>
+  <h2 class="flex">
+    <div class="i-emojione:waving-hand-medium-dark-skin-tone"></div>
+     Hello
+  </h2>
+</Main>
