@@ -4,6 +4,7 @@ import "@fontsource-variable/comfortaa";
 import "../styles.css";
 
 import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
 ---
 
 <html lang="en">
@@ -14,19 +15,17 @@ import Nav from "../components/Nav.astro";
     <title>Astro</title>
   </head>
 
-  <body class="min-h-screen font-b dark:bg-slate-700 dark:color-white">
-    <div class="grid-container grid grid-cols-2 mx-auto container">
-      <Nav class="col-span-2 px-5 py-6" />
+  <body
+    class="mx-auto min-h-screen font-b container dark:bg-slate-700 dark:color-white"
+  >
+    <Nav class="px-5 py-6" />
 
-      <div class="col-span-2 mb-5 mt-2 border-b border-primary-300"></div>
+    <div class="mb-5 mt-2 border-b border-primary-300"></div>
 
+    <main>
       <slot />
-    </div>
+    </main>
+
+    <Footer />
   </body>
 </html>
-
-<style>
-  .grid-container {
-    grid-template-columns: 2fr 1fr;
-  }
-</style>

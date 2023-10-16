@@ -1,20 +1,35 @@
 ---
-import { getCollection } from "astro:content";
+import { AppConfig } from "../AppConfig";
 import Main from "../layouts/Main.astro";
-import BlogList from "../components/BlogList.astro";
 
-// Get all entries from a collection.
-// Requires the name of the collection as an argument.
-// Example: retrieve `src/content/blog/**`
-const blogs = await getCollection("blog");
+// @unocss-include
+const links = [
+  { name: "GitHub", icon: "i-fa6-brands:github", href: AppConfig.links.github },
+  {
+    name: "Email",
+    icon: "i-fa6-solid:envelope",
+    href: `mailto:${AppConfig.email}`,
+  },
+];
 ---
 
 <Main>
-  <main>
-    <BlogList blogs={blogs} />
-  </main>
-  <h2 class="flex">
-    <div class="i-emojione:waving-hand-medium-dark-skin-tone"></div>
-     Hello
-  </h2>
+  <p>Hello 👋</p>
+
+  <p>I'm Hollis, a Software Engineer and DevOps Engineer.</p>
+
+  <p>Here is my <a href="/blog">blog</a> for storing my random thoughts.</p>
+
+  <p>Find me on</p>
+
+  <p class="flex gap-2">
+    {
+      links.map((link) => (
+        <a href={link.href} target="_blank" rel="noreferrer noopener">
+          <span class:list={["inline-block mr-1", link.icon]} />
+          {link.name}
+        </a>
+      ))
+    }
+  </p>
 </Main>

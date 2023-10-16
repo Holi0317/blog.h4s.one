@@ -1,8 +1,8 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
-import Main from "../../layouts/Main.astro";
-import BlogTitle from "../../components/BlogTitle.astro";
-import { AppConfig } from "../../AppConfig";
+import Main from "../../../layouts/Main.astro";
+import BlogTitle from "../../../components/BlogTitle.astro";
+import { AppConfig } from "../../../AppConfig";
 
 export async function getStaticPaths() {
   const blogs = await getCollection("blog");
@@ -31,28 +31,22 @@ const githubUrl = new URL(
 ---
 
 <Main>
-  <main class="pb-8">
-    <BlogTitle blog={entry} />
+  <BlogTitle blog={entry} />
 
-    <article class="blog">
-      <Content />
-    </article>
+  <article class="blog">
+    <Content />
+  </article>
 
-    <p class="my-6">
-      <a href={githubUrl.toString()} target="_blank" rel="noreferrer noopener">
-        View this page on GitHub
-      </a>
-    </p>
-  </main>
+  <p class="my-6">
+    <a href={githubUrl.toString()} target="_blank" rel="noreferrer noopener">
+      View this page on GitHub
+    </a>
+  </p>
 </Main>
 
 <style is:global>
   article.blog :is(h1, h2, h3, h4, h5, h6) {
     @apply mt-10 mb-6;
-  }
-
-  article.blog :is(p, pre) {
-    @apply my-3;
   }
 
   article.blog hr {

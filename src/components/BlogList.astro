@@ -21,7 +21,7 @@ const blogs = Astro.props.blogs
   {
     blogs.map((entry) => (
       <BlogSnippet
-        class="border-0 border-b-1 border-primary-200 border-dotted py-3"
+        class="border-0 border-b-1 border-primary-200 border-dotted py-3 last:border-b-0"
         blog={entry}
       />
     ))

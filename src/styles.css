@@ -59,13 +59,15 @@ main a[href] {
   @apply visited:color-primary-300;
 }
 
-header a[href] {
+header a[href],
+footer a[href] {
   @apply color-inherit;
   @apply visited:color-inherit;
 }
 
 main a[href],
-header a[href] {
+header a[href],
+footer a[href] {
   @apply transition-color duration-300 decoration-none;
 
   @apply hover:color-primary-500;
@@ -80,4 +82,8 @@ h4,
 h5,
 h6 {
   @apply font-d;
+}
+
+p {
+  @apply my-3;
 }

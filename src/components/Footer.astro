@@ -1,0 +1,22 @@
+---
+import { AppConfig } from "../AppConfig";
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<hr class="border-0 border-t-1 border-primary-200" />
+
+<footer class:list={["my-6 flex text-xl gap-3 ", className]}>
+  <a href={AppConfig.links.github} target="_blank" title="My Github profile">
+    <div class="i-fa6-brands:github"></div>
+  </a>
+
+  <a href="rss" target="_blank" title="Subscribe with RSS">
+    <!-- TODO: Add proper rss link -->
+    <div class="i-fa6-solid:rss"></div>
+  </a>
+</footer>
