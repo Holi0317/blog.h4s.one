@@ -1,14 +1,11 @@
 ---
-import { getCollection } from "astro:content";
 import Main from "../layouts/Main.astro";
-import BlogList from "../components/BlogList.astro";
-
-// Get all entries from a collection.
-// Requires the name of the collection as an argument.
-// Example: retrieve `src/content/blog/**`
-const blogs = await getCollection("blog");
 ---
 
 <Main>
-  <BlogList blogs={blogs} />
+  <p>Hello 👋</p>
+
+  <p>I'm Hollis, a Software Engineer and DevOps Engineer.</p>
+
+  <p>Here is my <a href="/blog">blog</a> for storing my random thoughts.</p>
 </Main>
