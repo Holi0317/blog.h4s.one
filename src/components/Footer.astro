@@ -10,7 +10,28 @@ const { class: className } = Astro.props;
 
 <hr class="border-0 border-t-1 border-primary-200" />
 
-<footer class:list={["my-6 flex text-xl gap-3", className]}>
+<footer
+  class:list={[
+    "my-6 flex text-lg gap-3 content-center justify-center text-gray",
+    className,
+  ]}
+>
+  <a href="/">{Astro.site?.hostname}</a>
+
+  <div>
+    Built with
+    <a
+      href="https://astro.build"
+      target="_blank"
+      rel="noreferrer noopener"
+      class="group"
+    >
+      astro <span
+        class="i-devicon:astro?mask group-hover:i-devicon:astro group-active:i-devicon:astro group-focus:i-devicon:astro"
+      ></span>
+    </a>
+  </div>
+
   <a href={AppConfig.links.github} target="_blank" title="My Github profile">
     <div class="i-fa6-brands:github"></div>
   </a>

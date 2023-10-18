@@ -18,6 +18,7 @@
     "@astrojs/rss": "^3.0.0",
     "@fontsource-variable/comfortaa": "^5.0.15",
     "@fontsource-variable/space-grotesk": "^5.0.13",
+    "@iconify-json/devicon": "^1.1.15",
     "@iconify-json/emojione": "^1.1.7",
     "@iconify-json/fa6-brands": "^1.1.13",
     "@iconify-json/fa6-regular": "^1.1.13",
