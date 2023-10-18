@@ -31,7 +31,10 @@ const githubUrl = new URL(
 );
 ---
 
-<MainLayout title={`${entry.data.title} - ${AppConfig.name}`}>
+<MainLayout
+  title={`${entry.data.title} - ${AppConfig.name}`}
+  class="mx-auto max-w-3xl"
+>
   <BlogTitle blog={entry} />
 
   <article class="blog">
