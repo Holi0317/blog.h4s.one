@@ -9,7 +9,12 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<header class:list={["flex flex-row items-center justify-center", className]}>
+<header
+  class:list={[
+    "flex flex-row items-center justify-center max-w-7xl mx-auto",
+    className,
+  ]}
+>
   <h1 class="font-size-8 fw-500">
     <a href="/" class="flex">
       <Rainbow class="mr-1" />
@@ -21,3 +26,5 @@ const { class: className } = Astro.props;
     <a href="/blog">Posts</a>
   </nav>
 </header>
+
+<hr class="mb-5 mt-2 border-b border-primary-300" />
