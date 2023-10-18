@@ -14,6 +14,9 @@ dependencies:
   '@fontsource-variable/space-grotesk':
     specifier: ^5.0.13
     version: 5.0.13
+  '@iconify-json/devicon':
+    specifier: ^1.1.15
+    version: 1.1.15
   '@iconify-json/emojione':
     specifier: ^1.1.7
     version: 1.1.7
@@ -956,6 +959,12 @@ packages:
   /@humanwhocodes/object-schema@1.2.1:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
+
+  /@iconify-json/devicon@1.1.15:
+    resolution: {integrity: sha512-74EAkBDEAjx7L0YiVEU4Hud0Erx9G0bjcWwBCIhkXM3Cfy46QeQ/1y/4YnSlDeDwgW2SZm5aPS70/aNxjQFrkA==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: false
 
   /@iconify-json/emojione@1.1.7:
     resolution: {integrity: sha512-A7iYDLGmvg6VIAcNZugzbZc7klJlZAVy9ea3H6STfOJe3Nt0AltdehOl5ZhIuAHbtJDFqX/ZuEySOhxfnkdOyg==}
