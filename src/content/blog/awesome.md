@@ -32,16 +32,22 @@ interesting projects and links that might be useful to anyone.
   - Similar but not the same with [fx](https://fx.wtf/), which got a easier to
     understand language
 
-# Cloud
+# Cloud and Devops
 
 - [Ampt](https://getampt.com/): [Serverless framework] replacement (sorry I
   don't have a good grip on this)
 - [SST](https://sst.dev/): Another [Serverless framework] replacement, this time
-  with CDK
+  with [CDK]
   - Check out [JS Party #274](https://changelog.com/jsparty/274) for the
     discussion
+- [Dagger](https://dagger.io/): CI with, _check notes_, GraphQL and general
+  purpose programming language as config file
+  - We seem to love using GP programming language for configuration. It kinda
+    started with [CDK], then we got [temporal.io] and now dagger
 
 [serverless framework]: https://www.serverless.com/
+[cdk]: https://aws.amazon.com/cdk/
+[temporal.io]: https://temporal.io
 
 # SQL
 
