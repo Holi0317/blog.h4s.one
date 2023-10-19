@@ -1,5 +1,6 @@
 import { defineConfig } from "astro/config";
 import UnoCSS from "unocss/astro";
+import remarkEmoji from "remark-gemoji";
 import rehypeSlug from "rehype-slug-custom-id";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeExternalLinks from "rehype-external-links";
@@ -30,6 +31,8 @@ export default defineConfig({
     shikiConfig: {
       theme: "one-dark-pro",
     },
+
+    remarkPlugins: [remarkEmoji],
 
     rehypePlugins: [
       [

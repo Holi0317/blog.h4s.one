@@ -9,6 +9,16 @@ draft: true
 
 This is a testing article, for testing out markdown features.
 
+# Additional features via plugins
+
+## Emoji shortcode
+
+```md
+This will be a penguin emoji :penguin:.
+```
+
+This will be a penguin emoji :penguin:.
+
 ### What is Markdown? {#wat}
 
 Markdown is a lightweight markup language that you can use to format plain text
