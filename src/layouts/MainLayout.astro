@@ -26,7 +26,6 @@ const { title, class: className } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <meta name="author" content={AppConfig.name} />
     <meta name="description" content={`Blog page for ${AppConfig.name}`} />
-    <meta name="color-scheme" content="dark light" />
     <meta name="”robots”" content="index, follow" />
 
     <title>{title}</title>
@@ -40,8 +39,8 @@ const { title, class: className } = Astro.props;
     />
   </head>
 
-  <body class="min-h-screen font-b dark:bg-slate-700 dark:color-white">
-    <div class="mx-auto px-3">
+  <body class="min-h-screen font-b">
+    <div class="px-3 container">
       <Nav class="px-5 py-6" />
 
       <main class:list={className}>

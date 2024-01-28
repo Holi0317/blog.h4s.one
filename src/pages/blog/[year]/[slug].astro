@@ -31,10 +31,7 @@ const githubUrl = new URL(
 );
 ---
 
-<MainLayout
-  title={`${entry.data.title} - ${AppConfig.name}`}
-  class="mx-auto max-w-3xl"
->
+<MainLayout title={`${entry.data.title} | ${AppConfig.name}`} class="max-w-3xl">
   <BlogTitle blog={entry} />
 
   <article class="blog">
@@ -54,7 +51,7 @@ const githubUrl = new URL(
   }
 
   article.blog hr {
-    @apply my-6 border-primary-300;
+    @apply my-6 border-secondary;
   }
 
   article.blog pre {
@@ -62,9 +59,8 @@ const githubUrl = new URL(
   }
 
   article.blog blockquote {
-    @apply italic p-3 my-6 b-l-8 b-l-solid b-l-orange;
+    @apply italic p-3 my-6 b-l-8 b-l-solid b-l-secondary;
 
     @apply bg-warmGray-2;
-    @apply dark:bg-warmGray-6;
   }
 </style>

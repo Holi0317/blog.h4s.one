@@ -10,6 +10,6 @@ import { AppConfig } from "../../AppConfig";
 const blogs = await getCollection("blog");
 ---
 
-<MainLayout title={`Blog - ${AppConfig.name}`} class="mx-auto max-w-3xl">
+<MainLayout title={`Blog | ${AppConfig.name}`} class="max-w-3xl">
   <BlogList blogs={blogs} />
 </MainLayout>

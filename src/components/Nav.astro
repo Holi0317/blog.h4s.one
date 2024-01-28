@@ -15,7 +15,7 @@ const { class: className } = Astro.props;
     className,
   ]}
 >
-  <h1 class="font-size-8 fw-500">
+  <h1 class="font-size-8 fw-500 hover:color-primary">
     <a href="/" class="flex">
       <Rainbow class="mr-1" />
       {AppConfig.name}
@@ -27,4 +27,4 @@ const { class: className } = Astro.props;
   </nav>
 </header>
 
-<hr class="mb-5 mt-2 border-b border-primary-300" />
+<hr class="mb-5 mt-2 border-b border-secondary" />

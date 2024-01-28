@@ -2,12 +2,35 @@ import { defineConfig } from "unocss";
 import presetWind from "@unocss/preset-wind";
 import presetIcons from "@unocss/preset-icons";
 import transformerDirectives from "@unocss/transformer-directives";
+import { wcagContrast, type Color, formatHex, interpolate } from "culori";
+
+function contrastOf(color: string | Color) {
+  const b = wcagContrast(color, "#000");
+  const w = wcagContrast(color, "#fff");
+
+  return b > w ? "#000" : "#fff";
+}
+
+function palette(color: string) {
+  // Slightly lighten the color
+  const tint = interpolate([color, "#fff"], "hsl");
+
+  // Slightly darken the color
+  const shade = interpolate([color, "#fff"], "hsl");
+
+  return {
+    DEFAULT: color,
+
+    300: formatHex(tint(0.2)),
+    500: color,
+    700: formatHex(shade(0.2)),
+    contrast: contrastOf(color),
+  };
+}
 
 export default defineConfig({
   presets: [
-    presetWind({
-      dark: "media",
-    }),
+    presetWind({}),
     presetIcons({
       extraProperties: {
         display: "inline-block",
@@ -18,6 +41,10 @@ export default defineConfig({
   transformers: [transformerDirectives()],
 
   theme: {
+    container: {
+      center: true,
+    },
+
     fontFamily: {
       // Display font
       d: "Comfortaa Variable",
@@ -27,19 +54,13 @@ export default defineConfig({
     },
 
     colors: {
-      primary: {
-        "50": "#fef2f3",
-        "100": "#fedfe1",
-        "200": "#fecacd",
-        "300": "#fca5ab",
-        "400": "#f8717a",
-        "500": "#f0434e",
-        "600": "#dd2531",
-        "700": "#ba1b25",
-        "800": "#991b23",
-        "900": "#7f1d23",
-        "950": "#450a0e",
+      bkg: {
+        DEFAULT: "#fff",
+        contrast: contrastOf("#fff"),
       },
+
+      primary: palette("#d946ef"),
+      secondary: palette("#f59e0b"),
     },
   },
 });

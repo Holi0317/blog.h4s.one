@@ -39,11 +39,13 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.4.1",
+    "@types/culori": "^2.0.4",
     "@types/luxon": "^3.4.2",
     "@typescript-eslint/eslint-plugin": "^6.19.1",
     "@typescript-eslint/parser": "^6.19.1",
     "@unocss/eslint-config": "^0.58.4",
     "@unocss/transformer-directives": "^0.58.4",
+    "culori": "^4.0.1",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^0.31.3",
