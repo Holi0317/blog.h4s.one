@@ -7,6 +7,7 @@ pubDate: "2024-02-01"
 import BlogPicture from "../../components/BlogPicture.astro";
 import airflowDag from "../../assets/blog/temporal_airflow_dag.png";
 import temporalTimeline from "../../assets/blog/temporal_timeline.png";
+import dockerHub from "../../assets/blog/temporal_dockerhub.png";
 
 [Temporal](https://temporal.io/) is a new-ish workflow orchestration platform
 that gain attraction recently. We are using it for orchestrating our data
@@ -389,18 +390,89 @@ limited compare to a single activity per workflow.
 Oof that's a long write for a developer experience with temporal. Now let's take
 that hat off and wear the operator/infrastructure manager hat for temporal.
 
-First let's give a bit of background to this. We are using [AWS ECS] on
-[fargate] for deploying both temporal cluster and worker.
+First let's give a bit of background to this. We self hosting and uses [AWS ECS]
+on [fargate] for deploying both temporal cluster and worker. The persistent
+store is backed by a postgres database, while the visibility store is in the
+same postgres cluster, in a separate database.
 
 [aws ecs]: https://aws.amazon.com/ecs/
 [fargate]: https://aws.amazon.com/fargate/
 
 ## The good: Just a postgres to back all data need
 
+Temporal used to [require kafka] and [Elasticsearch], in addition to postgres
+for data storage and persistence. Recently they dropped the requirement on
+ElasticSearch, making it only requires a postgres cluster (2 databases) to
+operate.
+
+This makes operating temporal very easy. We are already using postgres for our
+main operation database. So we have the experience on maintaining the component,
+together with other operations.
+
+[require kafka]: https://github.com/temporalio/temporal/releases/tag/v1.5.0
+[Elasticsearch]: https://github.com/temporalio/temporal/releases/tag/v1.21.0
+
 ## The good: All services are stateless
+
+All components in the temporal cluster [are stateless](ebs). This is really
+important because ECS, unlike kubernetes, does not have any good solution on
+managing persistence storage.
+
+Yes they recently announced you can [use EBS in ECS]. But digging into the
+details the volume would get destroyed when the task shuts down. That is just a
+larger cache disk instead of persistence storage.
+
+Because of the stateless design, we can, in theory, easily scale the cluster.
+However can't really do per-service scaling because we are deploying in monolith
+mode. We choose that for easier management and planing to use vertical scaling
+until we hit some real limit.
+
+[are stateless]: https://docs.temporal.io/clusters#temporal-server
+[use EBS in ECS]:
+  https://aws.amazon.com/about-aws/whats-new/2024/01/amazon-ecs-fargate-integrate-ebs/:
 
 ## The good: Horizontal scaling (for workers) just works
 
-## The bad
+Each workers are pull-based. This means we can just spin up more workers,
+connect to the cluster and we now get more capacity for all our workloads.
 
-# Comparing with other tools
+## The meh: Documentation and docker images
+
+I have to make the expectation clear first: Temporal the company is not a
+charity. I am very graceful on how much I could do with the open source version
+of temporal. They do need to sell their cloud offering which might explain why
+some of the self-hosting documentation is imperfect. Afterall engineers behind
+this needs to put bread on the table and temporal is definitely not something a
+homelab enthusiast would host.
+
+Temporal has [helm chart](https://github.com/temporalio/helm-charts) for
+deploying to kubernetes. And a
+[docker compose](https://github.com/temporalio/docker-compose) repository for
+example compose files. We adopted form the compose files and wrote our terraform
+module, then deploy the ECS as services.
+
+I guess this is how most ECS users deal with installing new projects. Given that
+it's AWS's propriety playground, it makes little sense for most projects to even
+supports them . Just by developing them requires you pay some bucks to aws,
+compare to `kind` in kubernetes land which is free to access.
+
+But still, the docker image temporal publishes is a bit undescriptive. The `ui`
+image is the new dashboard UI while `web` was deprecated. For backend server,
+you will probably want `auto-setup` instead of `server` for database
+bootstraping script in it.
+
+You can get these information by digging into the docker compose files and
+reading the source for these images. But still, a better description on what
+each image does will probably be a better operator experience.
+
+<BlogPicture
+  src={dockerHub}
+  alt="Docker hub screenshot searching 'temporalio'
+organiztion, where description of docker images are 'Workflow as Code (TM) to build and
+operate resilient applications'"
+/>
+
+# Conclusion
+
+Temporal feels like a breeze compare with what we had for workflow and state
+machine management in the past.
