@@ -1,5 +1,5 @@
 ---
-title: "Temporal: Thoughts on after using 3 months"
+title: "Temporal.io: Thoughts on after using 3 months"
 snippet: ""
 pubDate: "2024-02-01"
 ---
@@ -7,17 +7,14 @@ pubDate: "2024-02-01"
 import BlogPicture from "../../components/BlogPicture.astro";
 import airflowDag from "../../assets/blog/temporal_airflow_dag.png";
 import temporalTimeline from "../../assets/blog/temporal_timeline.png";
+import temporalLoad from "../../assets/blog/temporal_load.png";
 import dockerHub from "../../assets/blog/temporal_dockerhub.png";
 
 [Temporal](https://temporal.io/) is a new-ish workflow orchestration platform
 that gain attraction recently. We are using it for orchestrating our data
-pipeline and it has been working really great.
-
-Not to be confused with the TC39 temporal (datetime) API on Javascript. I am
-excited by that as well but that would be a story for another time.
-
-I will talk about both as a temporal user and as a infrastructure operator for
-temporal. A bit of paper cut from the platform and comparing it with others.
+pipeline and it has been working really great. I will talk through why temporal,
+our experience with it and the good and bad as both user of temporal and
+operator.
 
 # First thing first, what is temporal?
 
@@ -37,13 +34,14 @@ states or complete the state machine while dispatching _activities_ to interact
 with the outside world.
 
 I found temporal appealing for ETL workflow or whenever state machine can help
-solving the problem you are facing (sidenote: [state machines are awesome]!).
-But I found it surprising temporal is not branding themselves as a ETL tool.
-Maybe that space is a bit too crowded for competing.
+solving the problem you are facing (sidenote: [state machines are awesome]!). It
+is not a full solution for ETL but rather a building block or platform for
+building your own ETL pipeline.
 
-This pattern is not new. In fact [AWS Step Function] and [Apache Airflow] are
-trying to solve the similar problem but with different approaches. I will try
-comparing them (with a biased view ;p) with temporal throughout this post.
+This state machine management pattern is nothing new. In fact [AWS Step
+Function] and [Apache Airflow] are trying to solve the similar problem but with
+different approaches. I will try comparing them with temporal throughout this
+post. But the comparison might be biased.
 
 [JS Party – Episode #208]: https://changelog.com/jsparty/208
 [redux-saga]: https://redux-saga.js.org/
@@ -60,8 +58,9 @@ Python for temporal and didn't really look into support on other languages. So
 there might be some python-specific points here.
 
 Our usecase currently focus on scheduled workflow. Temporal can also be used for
-transaction orchestration (eg, ordering workflow) invoked by user action/api
-call but we are not using them for now.
+transaction orchestration invoked by user action/api call. For example, start a
+workflow execution for handling ordering and payment. We are not using any
+user-triggered workflows for now.
 
 ## The good: All execution are durable
 
@@ -92,21 +91,24 @@ whole new language. Example includes:
 
 Compare to what Step Functions was doing with their own language inside YAML,
 this is a much better developer experience. I have had a hard time debugging (or
-even just getting the correct syntax) for step function inside a cloudformation
-template. But with temporal workflow I can have realtime feedback from my code
-editor when I made a typo.
+even just getting the correct syntax) for step function inside a CloudFormation
+template. The Step Functions definition is still one of the "if it works don't
+touch it" zone in our company because no one wants to spend the time to learn
+their DSL. But with temporal workflow, developers can get a grasp on workflow
+definition easily, even without reading the documentation.
 
-However there is still a catch to the workflow: The workflow code must be
-deterministic. You can't introduce side effects in the workflow. For example,
-print out to the console is a side effect. Getting current datetime is another
-example. The SDK did provide some escape hatches for these operations. Like
-[workflow.logger] for printing/logging and [workflow.now] for getting current
-datetime.
+The catch when developing workflow is workflow code must be deterministic. You
+can't introduce side effects in the workflow. For example, print out to the
+console is a side effect. Getting current datetime is another example. The SDK
+did provide some escape hatches for these operations. Like [workflow.logger] for
+printing/logging and [workflow.now] for getting current datetime. This is well
+documented and logical. But might need to learn it through some try-and-error
+and grasp the idea what is allowed and what is not.
 
-The best way I like to introduce to new developers this idea is:
-
-> Lower your expectation on what you can do and think you are writing yaml, but
-> supercharged with python.
+In our case, we don't have many workflows and follow metadata-driven ETL
+process. Maintaining a workflow is still pretty hard and takes multiple
+iteration to make things right. Most business logic are developed in activity
+side and dynamic dispatch base on parameter.
 
 [workflow.logger]: https://python.temporal.io/temporalio.workflow.html#logger
 [workflow.now]: https://python.temporal.io/temporalio.workflow.html#now
@@ -141,8 +143,8 @@ it: Airflow can achieve this because you as developer needs to declare the whole
 dag, including the flow condition, submit it to airflow before doing anything.
 For temporal, it can only know which activities you are invoking when running
 the workflow. If temporal needs to introspect your code and learn all the
-possible activities it will invoke, you ends up with a fuzzing engine and that
-is not a problem temporal should be solving
+possible activities it will invoke, you ends up with a fuzzing engine trying to
+reach every codepath. That is not a problem temporal should be solving.
 
 So for temporal, we can only get a timeline of which activities got invoked in a
 given workflow:
@@ -176,16 +178,16 @@ We got a registry for registering all workflows and return all of them in a
 list. Our form will reflect on the parameter allow developer to write a JSON as
 payload, then invoke the workflow in temporal.
 
-This might sounds like a lot of work but the actual logic is only around 300
+This might sounds like a lot of work but the actual logic is only around 500
 lines of code (sorry it's propriety). We have a pytest case to make sure all of
 our workflows either does not accept any argument or a single [pydantic] model
 as argument to make the reflection easier and confirms with temporal best
 practice.
 
-Overall, this [streamlit] approaches works for us for these few months: It
-provides developers a list on all the workflows, their documentation and input
-parameter. In production, workflows are almost always only invoked by cron
-schedules. So the form is just for development purpose only.
+Overall, this [streamlit] approaches works for us for these months: It provides
+developers a list on all the workflows, their documentation and input parameter.
+In production, workflows are almost always only invoked by cron schedules. So
+the form is just for development purpose only.
 
 [streamlit]: https://streamlit.io/
 [pydantic]: https://docs.pydantic.dev/latest/
@@ -224,7 +226,7 @@ temporal.
 Also just want to point out there are a lot of terms and concepts around
 temporal. There are a stunning 9 pages [concepts] category. While having every
 concepts in the same place is great for looking up, I have spent multiple days
-reading through all 9 pages few times to really understand how temporal works.
+reading through all the pages few times to really understand how temporal works.
 
 [concepts]: https://docs.temporal.io/concepts/
 
@@ -254,9 +256,9 @@ documentation on this but there is an example in github repository on setting up
 [pydantic converter].
 
 This kinda works. But we need to remember to add type hint on all input and
-return value. Otherwise the receiving end will only get a `dict` instead of an
-inflated pydantic instance. In the end we add another test case to enforce the
-type hinting.
+return value. Otherwise the receiving end will only get a `dict` instead of a
+pydantic instance. In the end we add another test case to enforce the type
+hinting.
 
 Also I haven't got time to handle case where the type conversion fails. It seems
 our current implementation will stuck the workflow.
@@ -284,11 +286,11 @@ with.
 
 ## Tips: Treat temporal as a platform, not a full solution
 
-When start exploring temporal, part of me thought temporal is a full fledged
-solution for our orchestration problem. I was kinda disappointed when finding
-out there is no ui to invoke or discover workflows. And spending a lot of time
-(probably two weeks) to setup supporting tooling like logging and type
-transformers.
+When start exploring temporal, we pivot it as a replacement for airflow: a dag
+orchestration platform with lots of integration. I was kinda disappointed when
+finding out there is no ui to invoke or discover workflows. And spending
+considerable of time (probably two weeks) to setup supporting tooling like
+logging and type transformers.
 
 After taking a step back and looking at the whole platform, I feel temporal is
 more like a platform for us to build on instead of a final, packaged solution.
@@ -300,6 +302,20 @@ If your organization wants to try out temporal, be prepared to build tooling
 around it to make it easier to work with. We found writing pytest cases to
 enforce best practices is a useful pattern to codify some practices.
 
+## Tips: Stick with one language
+
+Multi language support sounds very sexy and probably an excuse to say "use the
+right language for the job". This is similar from what we hear as an advantage
+of the microservice pattern. However each new language used requires us to
+invest in tooling and support which we don't have the resource to do it here.
+
+If you are working in a larger organization and have a platform team dealing
+with developer tooling, adding more language support for temporal might be
+justified. Just note that while workflow and activity can be implemented in
+different language, you will lose language support (autocomplete) on activity
+argument and return value if you choose to do that. For us, we choose python as
+our blessed language and stick with it.
+
 ## Tips: Don't log local variables in exception
 
 This is very specific to our usecase. We are using [structlog] for logging. By
@@ -310,26 +326,25 @@ Turns out this feature might be expensive to execute. Some of our frames got
 list of 100k pydantic models to log out which drags down execution time.
 Meanwhile the python SDK enforce a 2 second deadline for workflow replay. If any
 of the workflow path hit a structlog exception logging, we probably will exceed
-the 2 second deadline and got "potential deadlock" in the console.
+the 2 second deadline and got confusing "potential deadlock" in the console.
 
 This is trivial to solve. Just disable local variable logging in structlog and
-everything runs much smoothly after that.
+everything runs smoothly after that.
 
 [structlog]: https://www.structlog.org/en/stable/index.html
 
 ## Tips: Semaphore in fork-join
 
-For each workflow, there can only be 100 pending activities associated with it.
-Having such constraint codified in temporal make sense to most system because it
-prevents you from overwhelming the system and other components and shooting in
-your foot.
+There is no limit on the concurrent activities associated with a workflow at any
+given point of time. Workers work in a pull-based model and they probably won't
+overwhelm themselves by taking on too much jobs at once.
 
-Having said that, this means we can't just spawn 1000 activity executions in our
-workflow. We need to batch them or limit how many concurrent activities in the
-workflow.
-
-In python and go, we can use semaphore to achieve the limit easily. For
-Typescript I guess we can go with [p-limit] from Sindre.
+However, we still experience some unreliable workflow replay or overwhelming the
+downstream system activities are calling if we dispatch too many activities at
+once. So we always limit concurrency if we are doing fork-join in our workflow.
+In most languages, this can be done with a semaphore
+([example in python](https://gist.github.com/Holi0317/770847fb0c3b43cfd9864739df5c1a23)).
+For Typescript I guess we can go with [p-limit] from Sindre.
 
 [p-limit]: https://github.com/sindresorhus/p-limit
 
@@ -337,18 +352,15 @@ Typescript I guess we can go with [p-limit] from Sindre.
 
 Actually I am not really sure if this patterns is good or not. We got some
 snippets that needs to be shared across workflows. Most of them are just
-wrappers on activities but some are doing a bit more, like running pydantic
-validation on the activity result. In the end we create a module `constructs` to
-hold all the shared code across workflows, borrowing the term from [CDK].
+wrappers on activities but some are coordinating with multiple activities call
+or even run pydantic validation in the workflow (Yes you can do that!). In the
+end we create a package `constructs` to hold all the shared code across
+workflows, borrowing the term from [CDK].
 
-We have generic activities like getting a value from [SSM Parameter store],
+We also have generic activities like getting a value from [SSM Parameter store],
 running SQL query and head or copying S3 objects. This is where constructs came
-in and remove some boilerplate on calling activities from a workflow.
-
-Note that there are still a 50MB limit on history size. So the return value from
-these generic activities has to be small in size. If the expected response is
-large, we create a specialized activity to deal with that to make sure we stay
-within the history size limit.
+in handy for removing some boilerplate and give guardrail on how to develop
+workflows.
 
 [cdk]: https://aws.amazon.com/cdk/
 [ssm parameter store]:
@@ -378,25 +390,62 @@ Ok let's define what is idempotent first:
 > https://serverlessland.com/event-driven-architecture/idempotency
 
 This means activities executing multiple times should produce the same result.
-This is just another way of saying "remember activities can execute multiple
-times in case of failure".
+Another way of saying is "remember activities can execute multiple times in case
+of failure".
 
-Because of that, it would be great if each activities are doing as few work as
-possible. This way even if an activity failed, the scope of impact is still
-limited compare to a single activity per workflow.
+This is important because in temporal, you can [reset] your workflow to previous
+state and continue execution. Just like rewinding your state machine. While this
+is used to [deal with serious logical bugs], we often need to use reset to skip
+some succeed activities during development.
+
+Not all activities are idempotent but try to make it works. For example, adding
+`ON CONFLICTS` clause on SQL `INSERT` statement to handle activity rerun.
+
+[reset]: https://docs.temporal.io/workflows#reset
+[deal with serious logical bugs]:
+  https://docs.temporal.io/dev-guide/typescript/debugging#resetting-workflows-to-deal-with-logical-bugs
 
 # Wearing the operator hat
 
 Oof that's a long write for a developer experience with temporal. Now let's take
 that hat off and wear the operator/infrastructure manager hat for temporal.
 
-First let's give a bit of background to this. We self hosting and uses [AWS ECS]
-on [fargate] for deploying both temporal cluster and worker. The persistent
-store is backed by a postgres database, while the visibility store is in the
-same postgres cluster, in a separate database.
+First let's give a bit of background to this. We self host temporal and uses
+[AWS ECS] on [fargate] for deploying temporal cluster in monolith mode and
+worker. Persistent store is backed by a postgres database on [RDS], while the
+visibility store is in the same postgres cluster, in a separate database.
 
 [aws ecs]: https://aws.amazon.com/ecs/
 [fargate]: https://aws.amazon.com/fargate/
+[rds]: https://aws.amazon.com/rds/
+
+## The good: You don't need Kubernetes or Spark
+
+Kubernetes and spark sounds like they have taken the world. Yes both of them are
+impressive technology but our company are not adopting them for a foreseeable
+future. We are just a small company and don't have the resource to manage dozens
+of kubernetes or spark cluster.
+
+Many new tools are kubernetes-first or kubernetes only. Other ways of deployment
+are basically second class citizen. Temporal supports kubernetes but at the same
+time didn't treat other ways of deployment second class citizens. We deploy
+temporal to ECS and we never had any issue with that.
+
+This is not as scalable as using a full-fledged kubernetes deployment. But the
+reality is our workload currently is pretty small. The main concern on scaling
+right now is the workers which can get scaled without kubernetes: Just add more
+replicas on ECS and we got more resource in the worker pool.
+
+The cluster use under 10% of CPU and memory currently on 1vCPU and 2GB machine.
+We can do horizontal scaling when we have more workload on the cluster but this
+graph suggest we still have a long way to go. Maybe this suggest we don't have
+real scaling problem but that's not the point. The point is we got options for
+small scale usecase. Not every nail needs a large hammer.
+
+<BlogPicture
+  src={temporalLoad}
+  alt="Temporal cluster load graph in ECS, showing both CPU and memory are under 10% most of the time"
+/>
 
 ## The good: Just a postgres to back all data need
 
@@ -419,26 +468,20 @@ important because ECS, unlike kubernetes, does not have any good solution on
 managing persistence storage.
 
 Yes they recently announced you can [use EBS in ECS]. But digging into the
-details the volume would get destroyed when the task shuts down. That is just a
-larger cache disk instead of persistence storage.
+details, the volume would get destroyed when the task shuts down. That is just a
+larger cache disk instead of real persistence storage.
 
-Because of the stateless design, we can, in theory, easily scale the cluster.
-However can't really do per-service scaling because we are deploying in monolith
-mode. We choose that for easier management and planing to use vertical scaling
-until we hit some real limit.
+Because of the stateless design, the initial deployment of temporal cluster took
+only a few hours for writing the terraform code and we got a cluster deployed in
+monolith mode.
 
 [are stateless]: https://docs.temporal.io/clusters#temporal-server
 [use EBS in ECS]:
   https://aws.amazon.com/about-aws/whats-new/2024/01/amazon-ecs-fargate-integrate-ebs/:
 
-## The good: Horizontal scaling (for workers) just works
-
-Each workers are pull-based. This means we can just spin up more workers,
-connect to the cluster and we now get more capacity for all our workloads.
-
 ## The meh: Documentation and docker images
 
-I have to make the expectation clear first: Temporal the company is not a
+I have to set the expectation clear first: Temporal the company is not a
 charity. I am very graceful on how much I could do with the open source version
 of temporal. They do need to sell their cloud offering which might explain why
 some of the self-hosting documentation is imperfect. Afterall engineers behind
@@ -451,15 +494,15 @@ deploying to kubernetes. And a
 example compose files. We adopted form the compose files and wrote our terraform
 module, then deploy the ECS as services.
 
-I guess this is how most ECS users deal with installing new projects. Given that
-it's AWS's propriety playground, it makes little sense for most projects to even
-supports them . Just by developing them requires you pay some bucks to aws,
+I guess this is how most ECS users deal with installing most projects. Given
+that it's AWS's propriety playground, it makes little sense for most projects to
+even supports them . Just by developing them requires you pay some bucks to aws,
 compare to `kind` in kubernetes land which is free to access.
 
 But still, the docker image temporal publishes is a bit undescriptive. The `ui`
 image is the new dashboard UI while `web` was deprecated. For backend server,
-you will probably want `auto-setup` instead of `server` for database
-bootstraping script in it.
+you will probably want `auto-setup` instead of `server` because database
+bootstraping script is bundled with `auto-setup` but not `server`.
 
 You can get these information by digging into the docker compose files and
 reading the source for these images. But still, a better description on what
@@ -475,4 +518,5 @@ operate resilient applications'"
 # Conclusion
 
 Temporal feels like a breeze compare with what we had for workflow and state
-machine management in the past.
+machine management in the past. It is resource efficient and the abstraction is
+vestibule enough to build whatever you want and won't feel limiting.
