@@ -35,6 +35,7 @@
     "rehype-slug-custom-id": "^1.1.0",
     "remark-gemoji": "^8.0.0",
     "remark-heading-id": "^1.0.1",
+    "sharp": "^0.33.2",
     "unocss": "^0.58.4"
   },
   "devDependencies": {
