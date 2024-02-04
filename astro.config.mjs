@@ -1,4 +1,5 @@
 import { defineConfig } from "astro/config";
+import mdx from "@astrojs/mdx";
 import UnoCSS from "unocss/astro";
 import remarkEmoji from "remark-gemoji";
 import rehypeSlug from "rehype-slug-custom-id";
@@ -57,5 +58,5 @@ export default defineConfig({
     ],
   },
 
-  integrations: [UnoCSS()],
+  integrations: [mdx(), UnoCSS()],
 });
