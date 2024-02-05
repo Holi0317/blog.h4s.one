@@ -1,10 +1,17 @@
 ---
 import { AppConfig } from "../AppConfig";
 import MainLayout from "../layouts/MainLayout.astro";
+import { Picture } from "astro:assets";
+import Cat from "../assets/homepage_catttt.jpg";
 
 // @unocss-include
 const links = [
   { name: "GitHub", icon: "i-fa6-brands:github", href: AppConfig.links.github },
+  {
+    name: "Linkedin",
+    icon: "i-fa6-brands:linkedin",
+    href: AppConfig.links.linkedin,
+  },
   {
     name: "Email",
     icon: "i-fa6-solid:envelope",
@@ -32,4 +39,14 @@ const links = [
       ))
     }
   </p>
+
+  <p>And here is my cat</p>
+  <Picture
+    widths={[300, 800, 1200, Cat.width / 2, Cat.width]}
+    src={Cat}
+    alt="Image of my cat, lying on my bed looking at the camera with her adorable eyes"
+    formats={["avif", "webp"]}
+  />
+
+  <p></p>
 </MainLayout>
