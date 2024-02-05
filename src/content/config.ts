@@ -25,6 +25,11 @@ const blogCollection = defineCollection({
      */
     pubDate: z.coerce.date(),
 
+    /**
+     * Github discussion ID for this post
+     */
+    discuss: z.coerce.number().optional(),
+
     tags: z.array(reference("tag")).default(() => []),
 
     /**

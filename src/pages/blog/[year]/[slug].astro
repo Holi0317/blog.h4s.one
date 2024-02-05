@@ -29,6 +29,11 @@ const githubUrl = new URL(
   `blob/${branch}/src/content/blog/${entry.id}`,
   AppConfig.links.repo,
 );
+
+const discussUrl =
+  entry.data.discuss == null
+    ? null
+    : new URL(`discussions/${entry.data.discuss}`, AppConfig.links.repo);
 ---
 
 <MainLayout title={`${entry.data.title} | ${AppConfig.name}`} class="max-w-3xl">
@@ -38,11 +43,29 @@ const githubUrl = new URL(
     <Content />
   </article>
 
-  <p class="my-6">
-    <a href={githubUrl.toString()} target="_blank" rel="noreferrer noopener">
-      View this page on GitHub
-    </a>
-  </p>
+  <ul class="my-6 flex list-none gap-3 p-0">
+    {
+      discussUrl == null ? null : (
+        <li>
+          <a
+            href={discussUrl.toString()}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            <span class="i-fa6-solid:comments" />
+            Discuss
+          </a>
+        </li>
+      )
+    }
+
+    <li>
+      <a href={githubUrl.toString()} target="_blank" rel="noreferrer noopener">
+        <span class="i-fa6-brands:github"></span>
+        View this page on GitHub
+      </a>
+    </li>
+  </ul>
 </MainLayout>
 
 <style is:global>
