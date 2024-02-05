@@ -8,7 +8,7 @@ interface Props {
 const { class: className } = Astro.props;
 ---
 
-<hr class="border-0 border-t-1 border-primary-200" />
+<hr class="border-primary-200 border-0 border-t-1" />
 
 <footer
   class:list={[
@@ -19,7 +19,7 @@ const { class: className } = Astro.props;
   <a href="/">{Astro.site?.hostname}</a>
 
   <div>
-    Built with
+    Build with
     <a
       href="https://astro.build"
       target="_blank"
