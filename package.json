@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^2.1.1",
-    "@astrojs/rss": "^4.0.4",
+    "@astrojs/rss": "^4.0.5",
     "@fontsource-variable/comfortaa": "^5.0.18",
     "@fontsource-variable/space-grotesk": "^5.0.16",
     "@iconify-json/devicon": "^1.1.35",
@@ -27,7 +27,7 @@
     "@unocss/preset-icons": "^0.58.5",
     "@unocss/preset-wind": "^0.58.5",
     "@unocss/reset": "^0.58.5",
-    "astro": "^4.3.2",
+    "astro": "^4.3.6",
     "hastscript": "^9.0.0",
     "luxon": "^3.4.4",
     "rehype-autolink-headings": "^7.1.0",
@@ -40,11 +40,11 @@
     "unocss": "^0.58.5"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.4.1",
-    "@types/culori": "^2.0.4",
+    "@astrojs/check": "^0.5.3",
+    "@types/culori": "^2.1.0",
     "@types/luxon": "^3.4.2",
-    "@typescript-eslint/eslint-plugin": "^6.20.0",
-    "@typescript-eslint/parser": "^6.20.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@unocss/eslint-config": "^0.58.5",
     "@unocss/transformer-directives": "^0.58.5",
     "culori": "^4.0.1",
@@ -52,7 +52,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-astro": "^0.31.4",
     "husky": "^9.0.10",
-    "lint-staged": "^15.2.1",
+    "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
     "typescript": "^5.3.3"
