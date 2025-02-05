@@ -15,26 +15,26 @@ importers:
         specifier: ^4.0.5
         version: 4.0.5
       '@fontsource-variable/comfortaa':
-        specifier: ^5.0.19
-        version: 5.0.19
+        specifier: ^5.1.1
+        version: 5.1.1
       '@fontsource-variable/space-grotesk':
-        specifier: ^5.0.17
-        version: 5.0.17
+        specifier: ^5.1.1
+        version: 5.1.1
       '@iconify-json/devicon':
-        specifier: ^1.1.36
-        version: 1.1.36
+        specifier: ^1.2.13
+        version: 1.2.13
       '@iconify-json/emojione':
-        specifier: ^1.1.10
-        version: 1.1.10
+        specifier: ^1.2.1
+        version: 1.2.1
       '@iconify-json/fa6-brands':
-        specifier: ^1.1.18
-        version: 1.1.18
+        specifier: ^1.2.5
+        version: 1.2.5
       '@iconify-json/fa6-regular':
-        specifier: ^1.1.18
-        version: 1.1.18
+        specifier: ^1.2.3
+        version: 1.2.3
       '@iconify-json/fa6-solid':
-        specifier: ^1.1.20
-        version: 1.1.20
+        specifier: ^1.2.3
+        version: 1.2.3
       '@unocss/preset-icons':
         specifier: ^0.58.5
         version: 0.58.5
@@ -834,11 +834,11 @@ packages:
     resolution: {integrity: sha512-lB05FkqEdUg2AA0xEbUz0SnkXT1LcCTa438W4IWTUh4hdOnVbQyOJ81OrDXsJk/LSiJHubgGEFoR5EHq1NsH1A==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@fontsource-variable/comfortaa@5.0.19':
-    resolution: {integrity: sha512-7U8nPzpWIwPvncQxb05kBUCnlLq+y8WeFGqYcCi7Y0Js65iEwogn/vsou98fpkvtAbgpkbJddbvGxfpCFjKnCA==}
+  '@fontsource-variable/comfortaa@5.1.1':
+    resolution: {integrity: sha512-ZuwxmA5ccVvTwl1bByhVHyxbROtg0Lk/cCB+f41LgKB/9dUAPj8wFFxN+oCWy702tsnzORtL86aSX6VVMYt12g==}
 
-  '@fontsource-variable/space-grotesk@5.0.17':
-    resolution: {integrity: sha512-CnVJT5H7I4pDy7zSxOWuKwrjkeMK7y8vI6T3VUSRNgAi7ZyGjJp54F7qI4RjhTzdVhvtI4JJUsm9K+TTvL+oMw==}
+  '@fontsource-variable/space-grotesk@5.1.1':
+    resolution: {integrity: sha512-LTz+nIUdm7ZVY9ZlqRiTKqByi+tIcQUKaKONBVSxKRABPRgdnJOwiuqvHa+ac7Xs0ZorDBm7O0fmwHuOGT3HIw==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -860,20 +860,20 @@ packages:
     resolution: {integrity: sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==}
     engines: {node: '>=18.18'}
 
-  '@iconify-json/devicon@1.1.36':
-    resolution: {integrity: sha512-gtHyK5atlNwFDLJ+eKXiEV5cCOwdRBCoKaN2HgOoPbMEM8ove/mAgQ8KA1/AEWPgY4Zl8mZwMwmpalZvVKImfQ==}
+  '@iconify-json/devicon@1.2.13':
+    resolution: {integrity: sha512-EPwXcB25EF8iMyYUnu1NM/HBz7x9VpfTPH0gyWPU9Co+fjVpTz1M93ePdOPvQ+XSgNSTi7tkLlQio0BEe2pFag==}
 
-  '@iconify-json/emojione@1.1.10':
-    resolution: {integrity: sha512-gzv5tbkbyoJFArWmmtGDmhvKjCcpa9a+qEFbW35IlKHc9LBL5lluRccP+BckCoYcoi5qi1VCPxzz6QL/UYW5VQ==}
+  '@iconify-json/emojione@1.2.1':
+    resolution: {integrity: sha512-F63lXycySmeq9b/utAjb9C7dHm326dSFAFQis8j/QlVivP0zLJQWolDUiUCggpU0nEpni08w5Wx4BDk6ysbkqQ==}
 
-  '@iconify-json/fa6-brands@1.1.18':
-    resolution: {integrity: sha512-vmeJP06Xbj0XbVGiBHg0q8H3M894d4bGXKCmiHt6JqUdpiGcIV7r96N+BOU4ZS1+hvpV57fTfXlFPiUfxAIfkg==}
+  '@iconify-json/fa6-brands@1.2.5':
+    resolution: {integrity: sha512-U/iFfziz6jSN9zArOJZYTtoj2tQyh6MxPdI8M84DQ2kEulPaj8j+h9bqvjmzszNHmD7v+kmmKd/MLkMKk+3Zuw==}
 
-  '@iconify-json/fa6-regular@1.1.18':
-    resolution: {integrity: sha512-+lLtiTHf02rxeC/9R6vzJi9eGcuubzeHfTt/HWvDnovz2Kt5NEntW8foUSLeLo7kPU7RNvea68lt7QM9HYFloQ==}
+  '@iconify-json/fa6-regular@1.2.3':
+    resolution: {integrity: sha512-NGV2j5mn4j49mpP7MABCljp1WPWKjwgfjN6NGwsmlFuQ7bdnz36nZB/5aRXLOcT36NXaBeCoT05G9aatdtMr3A==}
 
-  '@iconify-json/fa6-solid@1.1.20':
-    resolution: {integrity: sha512-99P9zOacNS56MNNT7Mzih2Loe3jzwNFKFBOiVh+kF+4D+AHW5zyksyvMizIgGu2cizFz6npaATlCtl3E5Zfjbw==}
+  '@iconify-json/fa6-solid@1.2.3':
+    resolution: {integrity: sha512-C5o8YJF+ekrS4wRb/6/0SE2KjRyJlCg++IOVC/fineiRinITivsmzFRNW1MQX2xfDZ1T7bxeKxLN6lcaTG3jGA==}
 
   '@iconify/types@2.0.0':
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
@@ -4254,9 +4254,9 @@ snapshots:
       '@eslint/core': 0.10.0
       levn: 0.4.1
 
-  '@fontsource-variable/comfortaa@5.0.19': {}
+  '@fontsource-variable/comfortaa@5.1.1': {}
 
-  '@fontsource-variable/space-grotesk@5.0.17': {}
+  '@fontsource-variable/space-grotesk@5.1.1': {}
 
   '@humanfs/core@0.19.1': {}
 
@@ -4271,23 +4271,23 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.1': {}
 
-  '@iconify-json/devicon@1.1.36':
+  '@iconify-json/devicon@1.2.13':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/emojione@1.1.10':
+  '@iconify-json/emojione@1.2.1':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/fa6-brands@1.1.18':
+  '@iconify-json/fa6-brands@1.2.5':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/fa6-regular@1.1.18':
+  '@iconify-json/fa6-regular@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 
-  '@iconify-json/fa6-solid@1.1.20':
+  '@iconify-json/fa6-solid@1.2.3':
     dependencies:
       '@iconify/types': 2.0.0
 
