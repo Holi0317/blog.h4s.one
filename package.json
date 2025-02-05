@@ -25,9 +25,9 @@
     "@iconify-json/fa6-brands": "^1.2.5",
     "@iconify-json/fa6-regular": "^1.2.3",
     "@iconify-json/fa6-solid": "^1.2.3",
-    "@unocss/preset-icons": "^0.58.5",
-    "@unocss/preset-wind": "^0.58.5",
-    "@unocss/reset": "^0.58.5",
+    "@unocss/preset-icons": "^65.4.3",
+    "@unocss/preset-wind": "^65.4.3",
+    "@unocss/reset": "^65.4.3",
     "astro": "^5.2.5",
     "hastscript": "^9.0.0",
     "luxon": "^3.4.4",
@@ -38,7 +38,7 @@
     "remark-gemoji": "^8.0.0",
     "remark-heading-id": "^1.0.1",
     "sharp": "^0.33.5",
-    "unocss": "^0.58.5"
+    "unocss": "^65.4.3"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.4",
@@ -48,7 +48,7 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/luxon": "^3.4.2",
     "@unocss/eslint-config": "^65.4.3",
-    "@unocss/transformer-directives": "^0.58.5",
+    "@unocss/transformer-directives": "^65.4.3",
     "culori": "^4.0.1",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
