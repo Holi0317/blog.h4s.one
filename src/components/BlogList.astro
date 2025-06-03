@@ -8,7 +8,7 @@ interface Props {
 
 const blogs = Astro.props.blogs
   .filter((blogs) => {
-    if (import.meta.env.CF_PAGES_BRANCH !== "main") {
+    if (import.meta.env.BUILD_BRANCH !== "main") {
       return true;
     }
 
