@@ -1,0 +1,62 @@
+name: "Deploy to Cloudflare worker"
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  build:
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: "actions/checkout@v4"
+      - name: "Setup pnpm"
+        uses: "pnpm/action-setup@v4.0.0"
+      - name: "Use Node.js"
+        uses: "actions/setup-node@v4"
+        with:
+          node-version-file: ".node-version"
+          cache: "pnpm"
+
+      - name: "Install node dependencies"
+        run: "pnpm install --frozen-lockfile"
+
+      - name: "Build"
+        env:
+          BUILD_BRANCH: "${{ github.head_ref }}"
+        run: "pnpm build"
+
+      - name: "Deploy to Cloudflare (production)"
+        if: "${{ github.event_name == 'push' }}"
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
+      - name: "Deploy to Cloudflare (preview)"
+        if: "${{ github.event_name == 'pull_request' }}"
+        id: deploy-pr
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command:
+            "versions upload --message 'Commit=${{ github.sha }};Branch=${{
+            github.head_ref }};Actor=${{ github.actor }}'"
+
+      - name: Comment PR
+        if: "${{ github.event_name == 'pull_request' }}"
+        uses: thollander/actions-comment-pull-request@v3
+        with:
+          comment-tag: cloudflare-deploy
+          message: |
+            Deployed to Cloudflare. URL = ${{ steps.deploy-pr.outputs.deployment-url }}

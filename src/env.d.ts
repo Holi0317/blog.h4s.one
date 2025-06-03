@@ -2,8 +2,7 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  readonly CF_PAGES?: 1;
-  readonly CF_PAGES_BRANCH?: string | "main";
+  readonly BUILD_BRANCH?: string | "main";
 }
 
 interface ImportMeta {

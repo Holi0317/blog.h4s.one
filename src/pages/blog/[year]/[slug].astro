@@ -24,7 +24,7 @@ interface Props {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
-const branch = import.meta.env.CF_PAGES_BRANCH ?? "main";
+const branch = import.meta.env.BUILD_BRANCH ?? "main";
 const githubUrl = new URL(
   `blob/${branch}/src/content/blog/${entry.id}`,
   AppConfig.links.repo,
