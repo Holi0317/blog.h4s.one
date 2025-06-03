@@ -32,7 +32,9 @@ jobs:
 
       - name: "Build"
         env:
-          BUILD_BRANCH: "${{ github.head_ref }}"
+          # Take care of both push and pr events
+          # Ref: https://stackoverflow.com/a/71158878
+          BUILD_BRANCH: "${{ github.head_ref || github.ref_name }}"
         run: "pnpm build"
 
       - name: "Deploy to Cloudflare (production)"
