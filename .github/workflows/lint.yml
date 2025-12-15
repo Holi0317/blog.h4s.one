@@ -24,7 +24,7 @@ jobs:
         run: "pnpm install --frozen-lockfile"
 
       - name: "Cache eslint"
-        uses: "actions/cache@v4"
+        uses: "actions/cache@v5"
         with:
           path: ".eslintcache"
           key: "${{ runner.os }}-eslint"
